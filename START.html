@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ TechMart - E-Commerce Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .status {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .status.connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .status.connecting {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffc107;
+        }
+
+        .status.disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .instructions {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .test-credentials {
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .test-credentials h4 {
+            color: #004085;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .test-credentials p {
+            color: #004085;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .feature {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🛍️</div>
+        <h1>TechMart E-Commerce</h1>
+        <p class="subtitle">Complete Online Store Platform</p>
+
+        <div id="statusDiv" class="status connecting">
+            <span class="spinner"></span> Checking backend connection...
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature-icon">📦</div>
+                <div>Product Catalog</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛒</div>
+                <div>Shopping Cart</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <div>Reviews & Ratings</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <div>Admin Dashboard</div>
+            </div>
+        </div>
+
+        <div class="instructions" id="instructionsDiv" style="display: none;">
+            <h3>⚠️ Backend Not Running</h3>
+            <p style="margin-bottom: 15px; color: #d32f2f;">Before accessing the store, you need to start the backend server.</p>
+            <h4 style="margin-bottom: 10px; color: #333;">Steps to Start:</h4>
+            <ol>
+                <li><strong>Open PowerShell / Terminal</strong></li>
+                <li><strong>Navigate to backend:</strong><br>cd backend</li>
+                <li><strong>Install dependencies:</strong><br>npm install</li>
+                <li><strong>Start the server:</strong><br>npm start</li>
+                <li><strong>Wait for:</strong><br>"✅ Server running on http://localhost:5000"</li>
+                <li><strong>Then click "Launch Store" below</strong></li>
+            </ol>
+        </div>
+
+        <div class="test-credentials" id="credentialsDiv" style="display: none;">
+            <h4>✅ Test Accounts Ready:</h4>
+            <p><strong>Admin Account:</strong><br>📧 admin@techmart.com<br>🔑 admin123</p>
+            <p style="margin-top: 8px;"><strong>Customer Account:</strong><br>📧 john@example.com<br>🔑 password123</p>
+        </div>
+
+        <div class="button-group" style="margin-top: 30px;">
+            <button id="launchBtn" class="btn-primary" onclick="launchStore()" disabled>
+                <span class="spinner"></span> Launching...
+            </button>
+            <button class="btn-secondary" onclick="window.location.href='index.html'">
+                📖 View Store HTML
+            </button>
+            <button class="btn-secondary" onclick="openBackendFolder()">
+                📁 Open Backend Folder
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Check backend connection
+        async function checkConnection() {
+            try {
+                const response = await fetch('http://localhost:5000/api/products', {
+                    method: 'GET',
+                    timeout: 3000
+                });
+                return response.ok;
+            } catch {
+                return false;
+            }
+        }
+
+        async function initiate() {
+            const connected = await checkConnection();
+            const statusDiv = document.getElementById('statusDiv');
+            const launchBtn = document.getElementById('launchBtn');
+            const instructionsDiv = document.getElementById('instructionsDiv');
+            const credentialsDiv = document.getElementById('credentialsDiv');
+
+            if (connected) {
+                statusDiv.innerHTML = '✅ Backend Connected! Ready to Launch';
+                statusDiv.className = 'status connected';
+                launchBtn.textContent = '🚀 Launch Store';
+                launchBtn.disabled = false;
+                credentialsDiv.style.display = 'block';
+            } else {
+                statusDiv.innerHTML = '❌ Backend Not Connected';
+                statusDiv.className = 'status disconnected';
+                launchBtn.textContent = '❌ Backend Required';
+                launchBtn.disabled = true;
+                instructionsDiv.style.display = 'block';
+            }
+        }
+
+        function launchStore() {
+            if (document.getElementById('launchBtn').disabled) return;
+            window.location.href = 'index.html';
+        }
+
+        function openBackendFolder() {
+            alert('📁 Backend Folder Location:\n\nc:\\Users\\ASUS\\OneDrive\\Desktop\\prodigy\\task 3\\ecommerce\\backend\n\nSteps:\n1. Open PowerShell\n2. cd backend\n3. npm install\n4. npm start');
+        }
+
+        // Check connection on page load and every 2 seconds
+        window.addEventListener('load', initiate);
+        setInterval(initiate, 2000);
+    </script>
+</body>
+</html>
